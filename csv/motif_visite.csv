@@ -1,0 +1,25 @@
+id,specialite_id,libelle
+1,1,Consultation
+2,1,Renouvellement de traitement
+3,1,Médecine du sport
+4,1,Enfants
+5,2,radiologie
+6,2,échographie
+7,2,scanner
+8,2,IRM
+9,3,nourrisson
+10,3,urgence
+11,3,suivi pédiatrique
+12,3,Première consultation
+13,4,Adulte - 1ère consultation
+14,4,Adulte - Suivi
+15,4,Enfant - 1ère consultation
+16,4,Enfant - suivi
+17,4,Cataracte
+18,4,chirurgie myopie
+19,5,Soins dentaires
+20,5,Urgence dentaire
+21,5,Bilan dentaire
+22,5,prothèses dentaires
+23,5,pose implants
+24,5,Enfants
