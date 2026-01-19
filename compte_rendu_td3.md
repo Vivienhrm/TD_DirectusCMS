@@ -69,7 +69,7 @@ SECRET=replace-with-random-secret-key-min-32-chars-long-abc123xyz
 J'ai créé un fichier `.gitignore` pour éviter de versionner les données sensibles :
 ```
 .env
-img/
+img_td3/
 ```
 
 ### Démarrage des services
@@ -94,14 +94,14 @@ docker-compose ps
 L'interface d'administration est accessible à l'adresse `http://localhost:8055`.
 J'ai pu vérifier que la page de connexion s'affiche correctement.
 
-Dans le navigateur : ![alt text](img/image.png)
+Dans le navigateur : ![alt text](img_td3/image.png)
 
 3. **Connexion :**
 Utilisation des identifiants définis dans le fichier `.env` :
 - Email : `your_admin_email`
 - Mot de passe : `your_admin_password!`
 
-Page de setup : ![alt text](img/image-1.png)
+Page de setup : ![alt text](img_td3/image-1.png)
 L'accès au tableau de bord est opérationnel.
 
 ---
@@ -155,7 +155,7 @@ J'ai créer manuellement chaque collection et champ dans l'interface tel que :
 3. Configure les relations Many-to-One entre praticiens, spécialités et structures.
 
 
-**Résultat** : ![alt text](img/image-15.png)
+**Résultat** : ![alt text](img_td3/image-15.png)
 
 ### Import des données
 
@@ -171,11 +171,11 @@ Pour respecter l'intégrité des données et les relations entre les tables, l'i
 
 Nous avons vérifié que les données ont bien été importées dans le CMS.
 
-Résultat dans le navigateur **/content/motif_visite** : ![alt text](img/image-4.png)
+Résultat dans le navigateur **/content/motif_visite** : ![alt text](img_td3/image-4.png)
 
-Résultat dans le navigateur **/content/praticien** : ![alt text](img/image-5.png)
+Résultat dans le navigateur **/content/praticien** : ![alt text](img_td3/image-5.png)
 
-Résultat dans le navigateur **/content/structure** : ![alt text](img/image-6.png)
+Résultat dans le navigateur **/content/structure** : ![alt text](img_td3/image-6.png)
 
 
 ## 3. API REST
@@ -198,41 +198,41 @@ J'ai réalisé les requêtes 1 à 7 via le navigateur et affiché les résultats
 **Requete 1 : Liste des praticiens**
 - **Objectif** : Récupérer la liste brute des praticiens.
 - **URL** : `/items/praticien?limit=3` (Limité à 3 pour la visibilité).
-- **Résultat** : ![alt text](img/image-8.png)
+- **Résultat** : ![alt text](img_td3/image-8.png)
 
 **Requete 2 : La spécialité d'ID 2**
 - **Objectif** : Récupérer tous les détails d'une spécialité spécifique par son identifiant unique.
 - **URL** : `/items/specialite/2`
-- **Résultat** : ![alt text](img/image-9.png)
+- **Résultat** : ![alt text](img_td3/image-9.png)
 
 **Requete 3 : La spécialité d'ID 2 (libellé uniquement)**
 - **Objectif** : Optimiser la requête pour ne récupérer que le champ indispensable.
 - **URL** : `/items/specialite/2?fields=libelle`
 - **Paramètre** : `fields=libelle` permet de filtrer la sortie JSON côte serveur.
-- **Résultat** : ![alt text](img/image-10.png)
+- **Résultat** : ![alt text](img_td3/image-10.png)
 
 **Requete 4 : Un praticien avec sa spécialité (libellé)**
 - **Objectif** : Effectuer une jointure simple pour récupérer le libellé de la spécialité liée à un praticien.
 - **URL** : `/items/praticien?fields=nom,prenom,specialite_id.libelle&limit=1`
 - **Syntaxe** : On utilise le point (`.`) pour accéder aux champs de la collection liée (`specialite_id.libelle`).
-- **Résultat** : ![alt text](img/image-11.png)
+- **Résultat** : ![alt text](img_td3/image-11.png)
 
 **Requete 5 : Une structure et la liste des praticiens rattachés**
 - **Objectif** : Utiliser la relation inverse (O2M) pour lister les praticiens d'une structure donnée.
 - **URL** : `/items/structure?fields=nom,ville,praticiens.nom,praticiens.prenom&limit=1`
 - **Condition** : Nécessite l'alias `praticiens` configuré dans le modèle de données de la collection `structure`.
-- **Résultat** : ![alt text](img/image-12.png)
+- **Résultat** : ![alt text](img_td3/image-12.png)
 
 **Requete 6 : Structure, praticiens et leurs spécialités respectives**
 - **Objectif** : Effectuer une requête "profonde" (Deep fetching) sur trois niveaux de relations.
 - **URL** : `/items/structure?fields=nom,ville,praticiens.nom,praticiens.prenom,praticiens.specialite_id.libelle&limit=1`
-- **Résultat** : ![alt text](img/image-13.png)
+- **Résultat** : ![alt text](img_td3/image-13.png)
 
 **Requete 7 : Les structures dont la ville contient "sur"**
 - **Objectif** : Filtrer les résultats sur un champ spécifique avec un opérateur de comparaison (`_contains`).
 - **URL** : `/items/structure?filter={"ville":{"_contains":"sur"}}&fields=nom,ville,praticiens.nom,praticiens.prenom,praticiens.specialite_id.libelle`
 - **Filtre** : Permet de cibler les structures situées dans des villes comme "Diaz-sur-Boulanger" ou "Carre-sur-Turpin".
-- **Résultat** : ![alt text](img/image-14.png)
+- **Résultat** : ![alt text](img_td3/image-14.png)
 
 
 ### Conclusion
